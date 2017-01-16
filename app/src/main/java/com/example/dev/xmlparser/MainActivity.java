@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
 
-            //setting adapter for each item in listView
+            //setting adapter for each item in listView with custom layout
             String[] list_title = title.toArray(new String[title.size()]);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.textview_item, list_title);
             list.setAdapter(adapter);
