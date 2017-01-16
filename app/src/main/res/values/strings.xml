@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">XMLParser</string>
+    <string name="title">RSS</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="cancel">Cancel</string>
+    <string name="open">Browser</string>
+</resources>
