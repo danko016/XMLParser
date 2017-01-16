@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         list = (ListView) findViewById(R.id.LVListView);
         spinner = (Spinner) findViewById(R.id.Spinner);
 
+        //set spinner adapter
         final String[] items = new String[]{"Choose RSS", rss1, rss2};
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, items);
         spinner.setAdapter(adapter);
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    //inner class for downloading xml async
     class Parse extends AsyncTask<String, String, String> {
 
         private Context context;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             Log.d("tag", "preExec");
 
+            //loading while fetching data
             progressDialog = new ProgressDialog(MainActivity.this);
             progressDialog.setMessage(getResources().getText(R.string.loading));
             progressDialog.setCancelable(false);
@@ -112,22 +114,19 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
 
+                //Jsoup parsing XML
                 Document document = Jsoup.connect(http_rss)
                         .userAgent("")
                         .timeout(9999 * 9999).get();
 
                 Elements elements = document.getElementsByTag("item");
 
+                //fetching data by xml element - depend on rss.xml website
                 for (Element element : elements) {
                     String title_parsed = element.getElementsByTag("title").first().text();
                     String url_parsed = element.getElementsByTag("guid").first().text();
                     String date_parsed = element.getElementsByTag("pubDate").first().text();
                     String description_parsed = element.getElementsByTag("description").first().text();
-
-                    Log.d("tag", "title: " + title_parsed);
-                    Log.d("url: ", url_parsed);
-                    Log.d("data: ", date_parsed);
-                    Log.d("description: ", description_parsed);
 
                     title.add(title_parsed);
                     url.add(url_parsed);
@@ -149,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
 
+            //setting adapter for each item in listView
             String[] list_title = title.toArray(new String[title.size()]);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.textview_item, list_title);
             list.setAdapter(adapter);
@@ -156,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                    Log.d("tag", "onClick");
+
+                    //Open dialog in webView to choose to open site from browser
                     String article = date.get(position) + "<br><br>" + description.get(position);
                     AlertDialog.Builder details = new AlertDialog.Builder(MainActivity.this);
                     details.setTitle(title.get(position));
