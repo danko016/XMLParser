@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
                 } else if (selected.equals(rss2)) {
                     Log.d("tag", "load rss2");
-                    Parse parse1 = new Parse(getApplicationContext(), urlRss2);
-                    parse1.execute("");
+                    Parse parse2 = new Parse(getApplicationContext(), urlRss2);
+                    parse2.execute("");
                 }
             }
 
@@ -150,19 +150,21 @@ public class MainActivity extends AppCompatActivity {
 
             //setting adapter for each item in listView with custom layout
             final String[] list_title = title.toArray(new String[title.size()]);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.textview_item, list_title);
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.textview_item, R.id.TVListItem, list_title);
             list.setAdapter(adapter);
 
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
 
                     //Open dialog in webView to choose to open site from browser
-                    String article = date.get(position) + "<br><br>" + description.get(position);
+                    final String article = date.get(position) + "<br><br>" + description.get(position);
                     final AlertDialog.Builder details = new AlertDialog.Builder(MainActivity.this);
                     details.setTitle(title.get(position));
+
                     WebView webView = new WebView(context);
                     webView.loadData(article, "text/html; charset=UTF-8", "UTF-8");
+
 
                     details.setView(webView);
                     details.setNegativeButton(getResources().getText(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -171,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     });
-
 
                     details.setPositiveButton(getResources().getText(R.string.open), new DialogInterface.OnClickListener() {
                         @Override
