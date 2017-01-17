@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.jsoup.Jsoup;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView list;
     private Spinner spinner;
+    TextView readTextView;
 
     String rss1 = "Sky News";
     String rss2 = "New York Times";
@@ -180,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(Intent.ACTION_VIEW);
                             intent.setData(Uri.parse(url.get(position)));
                             startActivity(intent);
+
                         }
                     });
                     details.show();

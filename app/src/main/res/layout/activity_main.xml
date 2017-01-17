@@ -9,9 +9,9 @@
 
     <TextView
         android:id="@+id/TVTitle"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/title"
         android:textColor="@color/grey"
         android:textSize="20sp" />
@@ -19,17 +19,17 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/grey"/>
+        android:background="@color/grey" />
 
     <Spinner
         android:id="@+id/Spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/grey"/>
+        android:background="@color/grey" />
 
     <ListView
         android:id="@+id/LVListView"
@@ -37,4 +37,6 @@
         android:layout_height="wrap_content">
 
     </ListView>
+
+
 </LinearLayout>
