@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //setting adapter for each item in listView with custom layout
-            String[] list_title = title.toArray(new String[title.size()]);
+            final String[] list_title = title.toArray(new String[title.size()]);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.textview_item, list_title);
             list.setAdapter(adapter);
 
@@ -159,9 +159,8 @@ public class MainActivity extends AppCompatActivity {
 
                     //Open dialog in webView to choose to open site from browser
                     String article = date.get(position) + "<br><br>" + description.get(position);
-                    AlertDialog.Builder details = new AlertDialog.Builder(MainActivity.this);
+                    final AlertDialog.Builder details = new AlertDialog.Builder(MainActivity.this);
                     details.setTitle(title.get(position));
-
                     WebView webView = new WebView(context);
                     webView.loadData(article, "text/html; charset=UTF-8", "UTF-8");
 
@@ -172,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     });
+
 
                     details.setPositiveButton(getResources().getText(R.string.open), new DialogInterface.OnClickListener() {
                         @Override
